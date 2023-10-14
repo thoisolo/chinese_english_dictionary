@@ -17,8 +17,7 @@ class ChineseEnglishDictionary {
     _traditionalDictionaryInitialized = true;
 
     final string = rawDictionary;
-    final lines =
-        string.split('\n').where((line) => !line.startsWith('#')).toList();
+    final lines = string.split('\n').where((line) => !line.startsWith('#')).toList();
     final dictionaryEntries = lines.map((line) {
       final matches = _entryRegex.allMatches(line);
       assert(matches.length == 1);
@@ -36,10 +35,9 @@ class ChineseEnglishDictionary {
     }).toList();
 
     dictionaryEntries.forEach((entry) {
-      final key = entry.traditional;
+      final key = entry.simplified;
       if (_traditionalDictionary.containsKey(key) &&
-          _traditionalDictionary[key]!.meanings.length >
-              entry.meanings.length) {
+          _traditionalDictionary[key]!.meanings.length > entry.meanings.length) {
         return;
       }
       _traditionalDictionary[key] = entry;
@@ -48,10 +46,7 @@ class ChineseEnglishDictionary {
 
   // '/rock/stone/stone inscription/one of the eight ancient musical instruments 八音[ba1 yin1]/'
   static List<String> _getSplitMeanings(String slashSeparatedMeanings) {
-    return slashSeparatedMeanings
-        .split('/')
-        .where((m) => m.isNotEmpty)
-        .toList();
+    return slashSeparatedMeanings.split('/').where((m) => m.isNotEmpty).toList();
   }
 
   Future<Iterable<String>> getEntries() async {
@@ -87,8 +82,7 @@ class ChineseEnglishDictionary {
     return result.meanings;
   }
 
-  _FollowVariantResult _followVariantsR(
-      List<String> meanings, Set<String> variantsFollowed) {
+  _FollowVariantResult _followVariantsR(List<String> meanings, Set<String> variantsFollowed) {
     var newMeanings = <String>[];
     var followedSome = false;
     for (final m in meanings) {
